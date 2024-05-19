@@ -86,7 +86,7 @@ struct STracingRay
 STriangle Triangles[12]; 
 SSphere Spheres[2];
 SCube cube;
-SCube cube2;
+
 SMaterial Materials[8];
 SLight uLight;
 SCamera uCamera;
@@ -231,66 +231,7 @@ void initializeDefaultScene (out STriangle triangles[12], out SSphere spheres[2]
 
 
 
-	cube2.bounds[0].v1 = vec3(0.0,0.0,3.0);
-	cube2.bounds[0].v2 = vec3(0.0,0.5,2.0);
-	cube2.bounds[0].v3 = vec3(0.0,0.0,2.5);
-	cube2.bounds[0].MaterialIdx = 7;
 	
-	cube2.bounds[1].v1 = vec3(0.0,0.5,2.5);
-	cube2.bounds[1].v2 = vec3(0.0,0.5,3.0);
-	cube2.bounds[1].v3 = vec3(0.0,0.0,2.5);
-	cube2.bounds[1].MaterialIdx = 7;
-
-	cube2.bounds[2].v1 = vec3(0.0,0.0,3.0);
-	cube2.bounds[2].v2 = vec3(0.0,0.5,3.0);
-	cube2.bounds[2].v3 = vec3(0.5,0.0,3.0);
-	cube2.bounds[2].MaterialIdx = 7;
-	
-	cube2.bounds[3].v1 = vec3(0.5,0.5,3.0);
-	cube2.bounds[3].v2 = vec3(0.0,0.5,3.0);
-	cube2.bounds[3].v3 = vec3(0.5,0.0,3.0);
-	cube2.bounds[3].MaterialIdx = 7;
-	
-	cube2.bounds[4].v1 = vec3(0.5,0.5,2.5);
-	cube2.bounds[4].v2 = vec3(0.0,0.5,2.5);
-	cube2.bounds[4].v3 = vec3(0.0,0.5,3.0);
-	cube2.bounds[4].MaterialIdx = 7;
-	
-	cube2.bounds[5].v1 = vec3(0.5,0.5,2.5);
-	cube2.bounds[5].v2 = vec3(0.5,0.5,3.0);
-	cube2.bounds[5].v3 = vec3(0.0,0.5,3.0);
-	cube2.bounds[5].MaterialIdx = 7;
-	
-	cube2.bounds[6].v1 = vec3(0.5,0.5,2.5);
-	cube2.bounds[6].v2 = vec3(0.5,0.5,3.0);
-	cube2.bounds[6].v3 = vec3(0.5,0.0,2.5);
-	cube2.bounds[6].MaterialIdx = 7;
-	
-	cube2.bounds[7].v1 = vec3(0.5,0.0,3.0);
-	cube2.bounds[7].v2 = vec3(0.5,0.5,3.0);
-	cube2.bounds[7].v3 = vec3(0.5,0.0,2.5);
-	cube2.bounds[7].MaterialIdx = 7;
-	
-	cube2.bounds[8].v1 = vec3(0.0,0.0,3.0);
-	cube2.bounds[8].v2 = vec3(0.0,0.0,2.5);
-	cube2.bounds[8].v3 = vec3(0.5,0.0,2.5);
-	cube2.bounds[8].MaterialIdx = 7;
-
-	cube2.bounds[9].v1 = vec3(0.0,0.0,3.0);
-	cube2.bounds[9].v2 = vec3(0.5,0.0,3.0);
-	cube2.bounds[9].v3 = vec3(0.5,0.0,2.5);
-	cube2.bounds[9].MaterialIdx = 7;
-	
-	cube2.bounds[10].v1 = vec3(0.0,0.5,2.5);
-	cube2.bounds[10].v2 = vec3(0.5,0.5,2.5);
-	cube2.bounds[10].v3 = vec3(0.0,0.0,2.5);
-	cube2.bounds[10].MaterialIdx = 7;
-	
-	cube2.bounds[11].v1 = vec3(0.5,0.0,2.5);
-	cube2.bounds[11].v2 = vec3(0.5,0.5,2.5);
-	cube2.bounds[11].v3 = vec3(0.0,0.0,2.5);
-	cube2.bounds[11].MaterialIdx = 7;
-	cube2.MaterialIdx = 7;
 
 
 
@@ -485,24 +426,7 @@ bool Raytrace ( SRay ray, float start, float final, inout SIntersection intersec
 			result = true;   
 		} 
 	}
-for(int i = 0; i < 12; i++) 
-	{
-	    STriangle triangle = cube2.bounds[i]; 
-	    if(IntersectTriangle(ray, triangle.v1, triangle.v2, triangle.v3, test) && test < intersect.Time)
-	    {        
-    	    intersect.Time = test;  
-			intersect.Point = ray.Origin + ray.Direction * test;  
-			intersect.Normal =               
-			normalize(cross(triangle.v1 - triangle.v2, triangle.v3 - triangle.v2));
-			SMaterial mat = Materials[7];
-			intersect.Color = cube_color;    
-			intersect.LightCoeffs = mat.LightCoeffs;
-			intersect.ReflectionCoef = mat.ReflectionCoef;       
-			intersect.RefractionCoef = mat.RefractionCoef;       
-			intersect.MaterialType = mat.MaterialType;       
-			result = true;   
-		} 
-	}
+
 	return result;
 } 
 
